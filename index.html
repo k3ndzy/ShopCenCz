@@ -18,15 +18,16 @@
     .slider{
       position:relative;
       width:90vw;
-      max-width:360px;   /* vừa iPhone */
-      height:auto;
-      max-height:520px;
+      max-width:420px;   /* vừa iPhone/iPad */
+      height:65vh;
+      max-height:620px;
       perspective:1200px;
       overflow:hidden;
     }
     .cards{
       display:flex;
       width:100%;
+      height:100%;
       transition:transform .7s ease;
       transform-style:preserve-3d;
     }
@@ -38,7 +39,7 @@
       color:#fff;
       text-align:center;
       box-shadow:0 8px 25px rgba(0,0,0,.2);
-      background:url('youtube.png') center/cover no-repeat;
+      background:url('youtube.png') left center / cover no-repeat; /* căn sát trái */
       transform:scale(0.9);
       transition:transform .6s ease, opacity .6s ease;
       opacity:0.6;
