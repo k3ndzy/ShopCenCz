@@ -6,7 +6,7 @@
   <title>YouTube Premium Card - Slider</title>
   <style>
     body{
-      background:#111;
+      background:#fff; /* nền trắng */
       min-height:100vh;
       display:flex;
       align-items:center;
@@ -18,7 +18,7 @@
     .slider{
       position:relative;
       width:90vw;
-      max-width:360px;   /* vừa với iPhone */
+      max-width:360px;   /* vừa iPhone */
       height:auto;
       max-height:520px;
       perspective:1200px;
@@ -37,7 +37,7 @@
       overflow:hidden;
       color:#fff;
       text-align:center;
-      box-shadow:0 8px 25px rgba(0,0,0,.6);
+      box-shadow:0 8px 25px rgba(0,0,0,.2);
       background:url('youtube.png') center/cover no-repeat;
       transform:scale(0.9);
       transition:transform .6s ease, opacity .6s ease;
@@ -68,7 +68,7 @@
       margin:25px 0;
       padding:60px 15px 25px;
       border:2px solid #FDFF00;
-      box-shadow:0 0 10px rgba(253,255,0,.7);
+      box-shadow:0 0 10px rgba(253,255,0,.6);
     }
 
     .badge-text {
@@ -81,7 +81,7 @@
       font-weight:900;
       padding:4px 8px;
       border-radius:6px;
-      box-shadow:0 0 8px rgba(253,255,0,.8);
+      box-shadow:0 0 8px rgba(253,255,0,.7);
       text-transform:uppercase;
       z-index:10;
     }
@@ -96,7 +96,7 @@
       border-radius:50%;
       overflow:hidden;
       border:2px solid #fff;
-      box-shadow:0 0 15px rgba(229,9,20,.9);
+      box-shadow:0 0 12px rgba(229,9,20,.9);
     }
     .avatar img{width:100%;height:100%;object-fit:cover}
 
@@ -155,8 +155,8 @@
       top:50%;
       transform:translateY(-50%);
       font-size:24px;
-      color:#fff;
-      background:rgba(0,0,0,0.3);
+      color:#333;
+      background:rgba(0,0,0,0.05);
       border:none;
       padding:6px 10px;
       border-radius:50%;
@@ -165,6 +165,34 @@
     }
     #prevBtn{left:6px;}
     #nextBtn{right:6px;}
+
+    /* Popup QR */
+    .qr-overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.85);
+      z-index:999;
+      justify-content:center;
+      align-items:center;
+    }
+    .qr-overlay img{
+      width:85%;
+      max-width:300px;
+      border-radius:12px;
+      border:3px solid #fff;
+      box-shadow:0 0 20px rgba(255,255,255,.9);
+    }
+    .qr-overlay .close-btn{
+      position:absolute;
+      top:15px;
+      right:15px;
+      font-size:28px;
+      color:#fff;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -189,7 +217,7 @@
             <div class="contact">Liên Hệ Ngay</div>
             <div class="phone-box">
               <a class="phone" href="tel:773099399">+420 773099399</a>
-              <div class="qr"><img src="QR.jpg" alt="QR"></div>
+              <div class="qr"><img src="QR.jpg" alt="QR" onclick="showQR(this.src)"></div>
             </div>
           </div>
         </div>
@@ -211,7 +239,7 @@
             <div class="contact">Liên Hệ Ngay</div>
             <div class="phone-box">
               <a class="phone" href="tel:773099399">+420 773099399</a>
-              <div class="qr"><img src="QR.jpg" alt="QR"></div>
+              <div class="qr"><img src="QR.jpg" alt="QR" onclick="showQR(this.src)"></div>
             </div>
           </div>
         </div>
@@ -233,7 +261,7 @@
             <div class="contact">Liên Hệ Ngay</div>
             <div class="phone-box">
               <a class="phone" href="tel:773099399">+420 773099399</a>
-              <div class="qr"><img src="QR.jpg" alt="QR"></div>
+              <div class="qr"><img src="QR.jpg" alt="QR" onclick="showQR(this.src)"></div>
             </div>
           </div>
         </div>
@@ -255,7 +283,7 @@
             <div class="contact">Liên Hệ Ngay</div>
             <div class="phone-box">
               <a class="phone" href="tel:773099399">+420 773099399</a>
-              <div class="qr"><img src="QR.jpg" alt="QR"></div>
+              <div class="qr"><img src="QR.jpg" alt="QR" onclick="showQR(this.src)"></div>
             </div>
           </div>
         </div>
@@ -263,7 +291,21 @@
     </div>
   </div>
 
+  <!-- Popup QR -->
+  <div class="qr-overlay" id="qrOverlay">
+    <button class="close-btn" onclick="closeQR()">✖</button>
+    <img id="qrLarge" src="" alt="QR lớn">
+  </div>
+
   <script>
+    function showQR(src){
+      document.getElementById('qrLarge').src = src;
+      document.getElementById('qrOverlay').style.display='flex';
+    }
+    function closeQR(){
+      document.getElementById('qrOverlay').style.display='none';
+    }
+
     const cards = document.getElementById("cards");
     const cardEls = cards.querySelectorAll(".card");
     let current = 0;
