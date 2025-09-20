@@ -22,8 +22,6 @@
       perspective:1200px;
       overflow:hidden;
     }
-
-
     .cards{
       display:flex;
       width:100%;
@@ -55,22 +53,27 @@
       background:rgba(229,9,20,.25);
       z-index:1;
     }
-    .card-content{
-      position:relative;
-      z-index:2;
-      padding:15px;
-    }
+.card-content{
+  position:relative;
+  z-index:2;
+  padding:15px;
 
-    .logo img{height:60px}
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end; /* đẩy xuống dưới */
+  height:100%;
+}
+.middle-box{
+  position:relative;
+  border-radius:12px;
+  padding:40px 15px 20px;
+  border:2px solid #FDFF00;
+  box-shadow:0 0 10px rgba(253,255,0,.6);
+  margin-bottom:120px; /* nâng box lên cách đáy 40px */
+}
 
-    .middle-box{
-      position:relative;
-      border-radius:12px;
-      margin:25px 0;
-      padding:60px 15px 25px;
-      border:2px solid #FDFF00;
-      box-shadow:0 0 10px rgba(253,255,0,.6);
-    }
+
+
 
     .badge-text {
       position:absolute;
