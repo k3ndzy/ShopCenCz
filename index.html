@@ -20,8 +20,8 @@
     .slider{
       position:relative;
       width:500px;
-      height:100vh;       /* luôn chiếm đủ chiều cao màn hình */
-      max-height:100vh;   /* không vượt quá màn hình */
+      height:100vh;
+      max-height:100vh;
       perspective:1200px;
       overflow:hidden;
     }
@@ -31,11 +31,12 @@
       height:100%;
       transition:transform .7s ease;
       transform-style:preserve-3d;
+      touch-action: pan-y; /* chỉ cho vuốt ngang */
     }
     .card{
       position:relative;
       min-width:100%;
-      height:100%; /* card luôn cao bằng slider */
+      height:100%;
       border-radius:24px;
       overflow:hidden;
       color:#fff;
@@ -67,11 +68,9 @@
       box-sizing:border-box;
     }
 
-    /* Logo */
     .logo{margin-bottom:15px}
     .logo img{height:80px;max-width:100%}
 
-    /* Box trong suốt */
     .middle-box{
       position:relative;
       background:transparent;
@@ -194,12 +193,8 @@
       cursor:pointer;
     }
 
-    /* Responsive mobile */
     @media (max-width: 768px) {
-      .slider{
-        width:100%;
-        height:100vh;
-      }
+      .slider{ width:100%; height:100vh; }
       .logo img{height:60px}
       .avatar{width:90px;height:90px;top:-50px}
       .price-box{font-size:13px;padding:5px 10px}
@@ -279,9 +274,11 @@
       cards.style.transform = `translateX(${-current*100}%)`;
     }
 
-    // Vuốt cảm ứng ngang
     let startX=0;
     cards.addEventListener("touchstart",e=>{ startX=e.touches[0].clientX; });
+    cards.addEventListener("touchmove",e=>{
+      e.preventDefault(); // chặn cuộn dọc khi vuốt
+    }, { passive:false });
     cards.addEventListener("touchend",e=>{
       let endX=e.changedTouches[0].clientX;
       if(endX<startX-50 && current<cardEls.length-1){ current++; }
